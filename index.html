@@ -18,7 +18,7 @@
     </div>
     <div id="game" class="container-fluid">
       <div class="row">
-        <div class="col-sm-4">
+        <div id="available-characters-container" class="col-sm-4">
           <h3 id="available-friends-title" class="">Available Friends</h3>
           <div id="character-ellie-cat" class="card float-left text-white bg-dark text-center mb-2 mr-2 character" style="width: 14rem;">
             <h5 class="card-header">Ellie Cat</h5>
@@ -57,14 +57,21 @@
             </div>
           </div>
         </div>
+        <div id="attack-container" class="col-sm-8 text-center">
+          <div class="row align-items-center mt-5">
+            <div id="main-character" class="col">
+              <p class="text-muted">First:<br>Choose Your Character</p>
+            </div>
+            <div id="attack-button" class="col">
+              <button type="button" class="btn btn-danger">Attack</button>
+            </div>
+            <div id="current-frenemie" class="col">
+              <p class="text-muted">Second:<br>Choose Your Frenemie</p>
+            </div>
+          </div>
 
+        </div>
       </div>
-
-
-
-
-
-
     </div>
   </body>
 </html>
