@@ -5,6 +5,13 @@ var mainCharacterAP
 var mainFrenemieHP
 var mainFrenemieCAP
 
+var mainCharacter = {
+  originalPower : function () {
+    return $("#main-character").children(".character").attr("data-health-points");
+  }
+
+}
+
 function setCharacterPowers () {
   $(".progress-bar").attr("aria-valuenow", "100").css("width", "100%");
   $("#character-ellie-cat").attr({"data-health-points":"140", "data-attack-power":"19", "data-counter-attack-power":"12"});
@@ -20,8 +27,18 @@ function setCharacterPowers () {
 function attackSequence () {
   mainFrenemieHP -= mainCharacterAP;
   mainCharacterAP += mainCharacterAP;
-  mainCharacterHP -= $
+  mainCharacterHP -= mainFrenemieCAP;
+  updateProgressBar (mainCharacter.originalPower(), mainCharacterHP);
+
 }
+
+function updateProgressBar (characterOriginalHP, characterUpdatedHP) {
+  var progressBarPercentage = Math.floor(characterUpdatedHP / characterOriginalHP * 100);
+  $("#main-character").find(".progress-bar").attr("aria-valuenow", progressBarPercentage).css("width", progressBarPercentage + "%");
+  $("#mainCharacter").find(".progressbarText").text(characterUpdatedHP);
+}
+
+
 
 $(document).ready(function () {
   setCharacterPowers();
@@ -47,7 +64,7 @@ $(document).ready(function () {
   //Activate the Button
   $("#attack-button").on("click", function(){
     if (mainCharacterActive == true && mainFrenemieActive == true) {
-
+      attackSequence();
     }
   });
 
