@@ -37,38 +37,32 @@ function attackSequence() {
   $("#attack-updates").prepend("<hr><p> You attacked " + currentFrenemie.name + " for " + mainCharacterAP + " damage.</p>" + "<p class='text-muted'>" + currentFrenemie.name + " attacked you for " + mainFrenemieCAP + " damage.</p>");
   updateProgressBar ("#current-frenemie", currentFrenemie.originalPower, mainFrenemieHP);
   mainCharacterAP += mainCharacterAP;
-
   if (mainFrenemieHP <= 0) {
     var defeated = $("#current-frenemie").find(".character").removeClass("text-danger").addClass("text-white").detach()
     defeatedCharacters.push(defeated);
-
     $("#current-frenemie").empty().text("You have defeated " + currentFrenemie.name + ".");
     mainFrenemieActive = false;
     characterCounter--;
     $("#attack-updates").prepend("<hr><p><strong>You have defeated " + currentFrenemie.name + ".</strong></p>");
-
     if (mainCharacterHP <= 0) {
       losses++;
-      $(".btn").removeClass("btn-danger").addClass("btn-warning").text("Play Again");
       $("#attack-updates").prepend("<hr><p><strong>" + currentFrenemie.name + " has defeated you.</strong></p>");
       $("#attack-updates").prepend("<hr><p class='alert-danger'><strong>You have lost " + losses + " times and won " + wins + " times.</strong></p>");
       var losser = $("#main-character").find(".character").removeClass("float-right").addClass("float-left").detach()
       defeatedCharacters.push(losser);
       $("#main-character").text(currentFrenemie.name + " has defeated you.");
-      $(".btn-warning").on("click", resetGame);
+      playAgainButton();
     } else {
       if(characterCounter == 0) {
         $("#current-frenemie").append("<p><strong>You have defeated all your frenemies!</strong></p>");
-        $(".btn").removeClass("btn-danger").addClass("btn-warning").text("Play Again");
         wins++;
         $("#attack-updates").prepend("<hr><p class='alert-success'><strong>You have won " + wins + " times and lost " + losses + " times.</strong></p>");
-        $(".btn-warning").on("click", resetGame);
+        playAgainButton();
       } else {
         $("#current-frenemie").append("<p class='text-muted'>Please choose another Frenemie.</p>");
       }
     }
   }
-
 }
 
 function updateProgressBar(characterName, characterOriginalHP, characterUpdatedHP) {
@@ -77,6 +71,10 @@ function updateProgressBar(characterName, characterOriginalHP, characterUpdatedH
   $(characterName).find(".progressbarText").text(characterUpdatedHP + " HP");
 }
 
+function playAgainButton() {
+  $("#attack-button").hide();
+  $("#play-again-button").show();
+}
 
 function resetGame() {
   $("#available-friends-title").text("Available Friends");
@@ -97,12 +95,13 @@ function resetGame() {
   setCharacterPowers();
   $("#main-character").html('<p class="text-muted">First:<br>Choose Your Character</p>');
   $("#current-frenemie").html('<p class="text-muted">Second:<br>Choose Your Frenemie</p>');
-  $(".btn").removeClass("btn-warning").addClass("btn-danger").text("Attack");
+  $("#attack-button").show();
+  $("#play-again-button").hide();
 }
 
 $(document).ready(function () {
   setCharacterPowers();
-
+  $("#play-again-button").hide();
   $(".character").on("click", function(){
     if (mainCharacterActive == false) {
       $("#main-character").empty();
@@ -123,11 +122,12 @@ $(document).ready(function () {
       mainFrenemieCAP = parseInt($(this).attr("data-counter-attack-power"));
     }
   });
-  //Activate the Button
+  //Activate the Attack Button
   $("#attack-button").on("click", function(){
     if (mainCharacterActive == true && mainFrenemieActive == true) {
       attackSequence();
     }
   });
-
+  //Activate the Reset Button
+  $("#play-again-button").on("click", resetGame);
 });
