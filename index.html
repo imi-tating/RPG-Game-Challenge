@@ -13,9 +13,10 @@
     <title>Ellie's RPG Game Challenge</title>
   </head>
   <body>
-    <div class="jumbotron jumbotron-fluid">
-      <h1 class="display-4 text-center">Ellie's RPG Game Challenge</h1>
+    <div class="jumbotron jumbotron-fluid bg-dark">
+      <h1 class="display-4 text-center text-white">Ellie's RPG Game Challenge</h1>
     </div>
+
     <div id="game" class="container-fluid">
       <div class="row">
         <div id="available-characters-container" class="col-sm-4">
@@ -29,7 +30,7 @@
               </div>
             </div>
           </div>
-          <div id="character-fuzzy-ball" class="card text-white bg-dark text-center mb-2 mr-2 character" style="width: 14rem;">
+          <div id="character-fuzzy-ball" class="card float-left text-white bg-dark text-center mb-2 mr-2 character" style="width: 14rem;">
             <h5 class="card-header">Fuzzy Ball</h5>
             <img class="card-img-top" src="assets/images/fuzzyBallTwitch.png" alt="Character Fuzzy Ball Cat Toy">
             <div class="card-body">
@@ -47,7 +48,7 @@
               </div>
             </div>
           </div>
-          <div id="character-dr-red-laser" class="card text-white bg-dark text-center mb-2 mr-2 character" style="width: 14rem;">
+          <div id="character-dr-red-laser" class="card float-left text-white bg-dark text-center mb-2 mr-2 character" style="width: 14rem;">
             <h5 class="card-header">Dr Red Laser</h5>
             <img class="card-img-top" src="assets/images/redLaser.png" alt="Character Dr Red Laser Cat Toy">
             <div class="card-body">
@@ -57,6 +58,7 @@
             </div>
           </div>
         </div>
+
         <div id="attack-container" class="col-sm-8 text-center">
           <h3 id="attack-title" class="invisible">Not visible</h3>
           <div class="row align-items-center">
@@ -70,8 +72,18 @@
               <p class="text-muted">Second:<br>Choose Your Frenemie</p>
             </div>
           </div>
+          <div class="row">
+            <div class="col mt-4">
+              <p id="attack-updates"></p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="row">
+        <div id="defeated-characters" class="col"></div>
+      </div>
+
     </div>
   </body>
 </html>
